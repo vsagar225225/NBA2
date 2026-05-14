@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="NBA Portal Automation Suite" verbose="1">
+    <test name="NBA Portal Cucumber Tests">
+        <classes>
+            <class name="com.nba.portal.runners.CucumberTestRunner"/>
+        </classes>
+    </test>
+</suite>
