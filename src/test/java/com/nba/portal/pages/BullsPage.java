@@ -4,30 +4,23 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class BullsPage {
-    private final WebDriver driver;
-    private final WebDriverWait wait;
+public class BullsPage extends BasePage {
     private final List<String> footerLinks = new ArrayList<>();
 
     private final By footerLinksLocator = By.cssSelector("footer a");
-    private final By body = By.tagName("body");
 
     public BullsPage(WebDriver driver, int timeoutSeconds) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+        super(driver, timeoutSeconds);
     }
 
     public void openHomePage(String baseUrl) {
@@ -41,21 +34,9 @@ public class BullsPage {
         return currentUrlContains("nba.com") && pageContainsText("Bulls");
     }
 
-    public boolean currentUrlContains(String expectedUrlPart) {
-        return wait.until(webDriver -> webDriver.getCurrentUrl().toLowerCase()
-                .contains(expectedUrlPart.toLowerCase()));
-    }
-
-    public boolean pageContainsText(String expectedText) {
-        return wait.until(ExpectedConditions.presenceOfElementLocated(body))
-                .getText()
-                .toLowerCase()
-                .contains(expectedText.toLowerCase());
-    }
-
     public void scrollToFooter() {
         // Footer links load near the bottom of the page, so scroll before collecting them.
-        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
         wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("footer")));
     }
 
@@ -109,21 +90,5 @@ public class BullsPage {
 
     private void closePopupsIfPresent() {
         clickIfPresent(By.id("onetrust-accept-btn-handler"));
-    }
-
-    private void clickIfPresent(By locator) {
-        try {
-            List<WebElement> elements = driver.findElements(locator);
-            if (!elements.isEmpty() && elements.get(0).isDisplayed()) {
-                elements.get(0).click();
-            }
-        } catch (Exception ignored) {
-        }
-    }
-
-    private void waitForPageReady() {
-        wait.until(webDriver -> ((JavascriptExecutor) webDriver)
-                .executeScript("return document.readyState")
-                .equals("complete"));
     }
 }

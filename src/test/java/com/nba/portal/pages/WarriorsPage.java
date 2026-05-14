@@ -1,29 +1,22 @@
 package com.nba.portal.pages;
 
-import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class WarriorsPage {
-    private final WebDriver driver;
-    private final WebDriverWait wait;
+public class WarriorsPage extends BasePage {
 
     private final By moreMenu = By.xpath("//span[text()='...']/parent::button | //button[contains(@aria-label, 'More')]");
     private final By newsAndFeaturesMenu = By.xpath("//a[contains(@title,'News') or contains(.,'News & Features')]");
     private final By videoFeeds = By.cssSelector("[data-testid='tile-article']");
     private final By videoDuration = By.cssSelector("time span, time");
-    private final By body = By.tagName("body");
 
     public WarriorsPage(WebDriver driver, int timeoutSeconds) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+        super(driver, timeoutSeconds);
     }
 
     public void openHomePage(String baseUrl) {
@@ -35,18 +28,6 @@ public class WarriorsPage {
     public boolean isLoaded() {
         waitForPageReady();
         return currentUrlContains("nba.com") && pageContainsText("Warriors");
-    }
-
-    public boolean currentUrlContains(String expectedUrlPart) {
-        return wait.until(webDriver -> webDriver.getCurrentUrl().toLowerCase()
-                .contains(expectedUrlPart.toLowerCase()));
-    }
-
-    public boolean pageContainsText(String expectedText) {
-        return wait.until(ExpectedConditions.presenceOfElementLocated(body))
-                .getText()
-                .toLowerCase()
-                .contains(expectedText.toLowerCase());
     }
 
     public void navigateToNewsAndFeatures() {
@@ -100,21 +81,5 @@ public class WarriorsPage {
         // Popups are optional and vary by session, so they are handled defensively.
         clickIfPresent(By.id("onetrust-accept-btn-handler"));
         clickIfPresent(By.xpath("//div[contains(@class, 'hover:cursor-pointer') and text()='x']"));
-    }
-
-    private void clickIfPresent(By locator) {
-        try {
-            List<WebElement> elements = driver.findElements(locator);
-            if (!elements.isEmpty() && elements.get(0).isDisplayed()) {
-                elements.get(0).click();
-            }
-        } catch (Exception ignored) {
-        }
-    }
-
-    private void waitForPageReady() {
-        wait.until(webDriver -> ((JavascriptExecutor) webDriver)
-                .executeScript("return document.readyState")
-                .equals("complete"));
     }
 }
