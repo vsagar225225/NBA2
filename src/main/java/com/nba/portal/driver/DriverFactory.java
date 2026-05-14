@@ -16,10 +16,7 @@ public class DriverFactory {
     public static WebDriver createDriver(String browser, boolean headless) {
         WebDriver driver;
 
-<<<<<<< HEAD
-=======
         // Keep browser creation in one place so tests do not duplicate setup logic.
->>>>>>> ea37d4f (Updated project with latest changes)
         switch (browser.toLowerCase()) {
             case "firefox":
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
@@ -42,10 +39,7 @@ public class DriverFactory {
             case "chrome":
             default:
                 ChromeOptions chromeOptions = new ChromeOptions();
-<<<<<<< HEAD
-=======
                 // This option avoids origin-related startup issues with some Chrome/Selenium versions.
->>>>>>> ea37d4f (Updated project with latest changes)
                 chromeOptions.addArguments("--remote-allow-origins=*");
                 chromeOptions.addArguments("--window-size=1366,768");
                 if (headless) {

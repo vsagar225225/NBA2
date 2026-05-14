@@ -18,10 +18,7 @@ public class SixersPage {
 
     private final By slidesLocator = By.xpath("//button[@data-testid='content-hero-navigation-button' and not(contains(@class, 'hidden'))]");
     private final By slideTitleLocator = By.xpath(".//*[contains(@class, 'ButtonTitle')]");
-<<<<<<< HEAD
-=======
     private final By body = By.tagName("body");
->>>>>>> ea37d4f (Updated project with latest changes)
 
     public SixersPage(WebDriver driver, int timeoutSeconds) {
         this.driver = driver;
@@ -34,8 +31,6 @@ public class SixersPage {
         closePopupsIfPresent();
     }
 
-<<<<<<< HEAD
-=======
     public boolean isLoaded() {
         waitForPageReady();
         return currentUrlContains("nba.com") && pageContainsText("76ers");
@@ -53,7 +48,6 @@ public class SixersPage {
                 .contains(expectedText.toLowerCase());
     }
 
->>>>>>> ea37d4f (Updated project with latest changes)
     public int getSlideCount() {
         return getSlides().size();
     }
@@ -73,10 +67,7 @@ public class SixersPage {
         List<String> actualTitles = getSlideTitles();
         Assert.assertFalse(actualTitles.isEmpty(), "No Sixers slide titles were found.");
 
-<<<<<<< HEAD
-=======
         // Validate the titles available on the page against the external JSON test data.
->>>>>>> ea37d4f (Updated project with latest changes)
         int titlesToValidate = Math.min(actualTitles.size(), expectedTitles.size());
         Assert.assertTrue(titlesToValidate > 0, "Expected slide title test data is empty.");
 
@@ -93,10 +84,7 @@ public class SixersPage {
         WebElement activeSlide = findActiveSlide(slides);
         wait.until(ExpectedConditions.attributeToBe(activeSlide, "aria-selected", "true"));
 
-<<<<<<< HEAD
-=======
         // Measure how long the active carousel slide remains selected.
->>>>>>> ea37d4f (Updated project with latest changes)
         long startTime = System.currentTimeMillis();
         wait.until(ExpectedConditions.attributeToBe(activeSlide, "aria-selected", "false"));
         long actualDurationSeconds = (System.currentTimeMillis() - startTime) / 1000;
@@ -108,10 +96,7 @@ public class SixersPage {
     }
 
     private WebElement findActiveSlide(List<WebElement> slides) {
-<<<<<<< HEAD
-=======
         // The active slide is marked by aria-selected=true in the carousel controls.
->>>>>>> ea37d4f (Updated project with latest changes)
         for (WebElement slide : slides) {
             if ("true".equals(slide.getAttribute("aria-selected"))) {
                 return slide;

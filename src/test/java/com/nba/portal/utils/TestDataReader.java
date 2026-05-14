@@ -15,10 +15,7 @@ public class TestDataReader {
 
     public TestDataReader() {
         try {
-<<<<<<< HEAD
-=======
             // Jackson reads external expected data so validations are not hard-coded in steps.
->>>>>>> ea37d4f (Updated project with latest changes)
             rootNode = new ObjectMapper().readTree(new File(TEST_DATA_PATH));
         } catch (IOException exception) {
             throw new IllegalStateException("Unable to read test data from " + TEST_DATA_PATH, exception);

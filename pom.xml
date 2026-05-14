@@ -62,12 +62,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire.version}</version>
                 <configuration>
-<<<<<<< HEAD
-=======
                     <useFile>false</useFile>
                     <disableXmlReport>true</disableXmlReport>
                     <redirectTestOutputToFile>false</redirectTestOutputToFile>
->>>>>>> ea37d4f (Updated project with latest changes)
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
