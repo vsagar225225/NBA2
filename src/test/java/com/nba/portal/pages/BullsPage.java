@@ -23,6 +23,10 @@ public class BullsPage {
     private final List<String> footerLinks = new ArrayList<>();
 
     private final By footerLinksLocator = By.cssSelector("footer a");
+<<<<<<< HEAD
+=======
+    private final By body = By.tagName("body");
+>>>>>>> ea37d4f (Updated project with latest changes)
 
     public BullsPage(WebDriver driver, int timeoutSeconds) {
         this.driver = driver;
@@ -35,7 +39,29 @@ public class BullsPage {
         closePopupsIfPresent();
     }
 
+<<<<<<< HEAD
     public void scrollToFooter() {
+=======
+    public boolean isLoaded() {
+        waitForPageReady();
+        return currentUrlContains("nba.com") && pageContainsText("Bulls");
+    }
+
+    public boolean currentUrlContains(String expectedUrlPart) {
+        return wait.until(webDriver -> webDriver.getCurrentUrl().toLowerCase()
+                .contains(expectedUrlPart.toLowerCase()));
+    }
+
+    public boolean pageContainsText(String expectedText) {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(body))
+                .getText()
+                .toLowerCase()
+                .contains(expectedText.toLowerCase());
+    }
+
+    public void scrollToFooter() {
+        // Footer links load near the bottom of the page, so scroll before collecting them.
+>>>>>>> ea37d4f (Updated project with latest changes)
         ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
         wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("footer")));
     }
@@ -56,6 +82,10 @@ public class BullsPage {
 
     public Path saveLinksToCsv() {
         try {
+<<<<<<< HEAD
+=======
+            // Store extracted links under target so generated files stay out of source control.
+>>>>>>> ea37d4f (Updated project with latest changes)
             Path targetDirectory = Path.of("target");
             Files.createDirectories(targetDirectory);
             Path csvPath = targetDirectory.resolve("footer_links.csv");
@@ -75,6 +105,10 @@ public class BullsPage {
         Set<String> uniqueLinks = new HashSet<>();
         Set<String> duplicateLinks = new HashSet<>();
 
+<<<<<<< HEAD
+=======
+        // A link is duplicate when it cannot be added to the unique set.
+>>>>>>> ea37d4f (Updated project with latest changes)
         for (String link : footerLinks) {
             if (!uniqueLinks.add(link)) {
                 duplicateLinks.add(link);

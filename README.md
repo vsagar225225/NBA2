@@ -33,11 +33,29 @@ Feature files are available in:
 
 Current features:
 
+<<<<<<< HEAD
 - `NbaHome.feature`
+=======
+>>>>>>> ea37d4f (Updated project with latest changes)
 - `Warriors.feature`
 - `Sixers.feature`
 - `Bulls.feature`
 
+<<<<<<< HEAD
+=======
+Step definition files are aligned with feature files:
+
+- `WarriorsSteps.java`
+- `SixersSteps.java`
+- `BullsSteps.java`
+
+Page object files are aligned with team features:
+
+- `WarriorsPage.java`
+- `SixersPage.java`
+- `BullsPage.java`
+
+>>>>>>> ea37d4f (Updated project with latest changes)
 ## Configuration
 
 Update values in:
@@ -68,8 +86,20 @@ mvn test -Dheadless=true
 Run tests separately in headless mode:
 
 ```bash
+<<<<<<< HEAD
 mvn test -Dheadless=true -Dcucumber.filter.tags="@home"
+=======
+>>>>>>> ea37d4f (Updated project with latest changes)
 mvn test -Dheadless=true -Dcucumber.filter.tags="@warriors"
 mvn test -Dheadless=true -Dcucumber.filter.tags="@sixers"
 mvn test -Dheadless=true -Dcucumber.filter.tags="@bulls"
 ```
+<<<<<<< HEAD
+=======
+
+## Reports
+
+Open the Cucumber HTML report after execution:
+
+`target/cucumber-report.html`
+>>>>>>> ea37d4f (Updated project with latest changes)

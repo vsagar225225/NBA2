@@ -8,6 +8,7 @@ public class ConfigReader {
     private final Properties properties = new Properties();
 
     public ConfigReader() {
+        // Load default framework settings from the classpath resource.
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("config.properties")) {
             if (inputStream == null) {
                 throw new IllegalStateException("config.properties file was not found in src/main/resources");
@@ -19,10 +20,12 @@ public class ConfigReader {
     }
 
     public String get(String key) {
+        // System properties allow Maven/Eclipse overrides such as -Dheadless=true.
         return System.getProperty(key, properties.getProperty(key));
     }
 
     public String get(String key, String defaultValue) {
+        // Prefer runtime override, then config file value, then caller-provided default.
         return System.getProperty(key, properties.getProperty(key, defaultValue));
     }
 

@@ -19,6 +19,10 @@ public class WarriorsPage {
     private final By newsAndFeaturesMenu = By.xpath("//a[contains(@title,'News') or contains(.,'News & Features')]");
     private final By videoFeeds = By.cssSelector("[data-testid='tile-article']");
     private final By videoDuration = By.cssSelector("time span, time");
+<<<<<<< HEAD
+=======
+    private final By body = By.tagName("body");
+>>>>>>> ea37d4f (Updated project with latest changes)
 
     public WarriorsPage(WebDriver driver, int timeoutSeconds) {
         this.driver = driver;
@@ -31,12 +35,36 @@ public class WarriorsPage {
         closePopupsIfPresent();
     }
 
+<<<<<<< HEAD
+=======
+    public boolean isLoaded() {
+        waitForPageReady();
+        return currentUrlContains("nba.com") && pageContainsText("Warriors");
+    }
+
+    public boolean currentUrlContains(String expectedUrlPart) {
+        return wait.until(webDriver -> webDriver.getCurrentUrl().toLowerCase()
+                .contains(expectedUrlPart.toLowerCase()));
+    }
+
+    public boolean pageContainsText(String expectedText) {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(body))
+                .getText()
+                .toLowerCase()
+                .contains(expectedText.toLowerCase());
+    }
+
+>>>>>>> ea37d4f (Updated project with latest changes)
     public void navigateToNewsAndFeatures() {
         try {
             WebElement moreElement = wait.until(ExpectedConditions.visibilityOfElementLocated(moreMenu));
             new Actions(driver).moveToElement(moreElement).perform();
             wait.until(ExpectedConditions.elementToBeClickable(newsAndFeaturesMenu)).click();
         } catch (Exception exception) {
+<<<<<<< HEAD
+=======
+            // Direct URL fallback keeps the validation stable if the responsive menu changes.
+>>>>>>> ea37d4f (Updated project with latest changes)
             driver.get("https://www.nba.com/warriors/news");
         }
 
@@ -53,6 +81,10 @@ public class WarriorsPage {
         int count = 0;
         List<WebElement> videos = driver.findElements(videoFeeds);
 
+<<<<<<< HEAD
+=======
+        // Each feed card can contain timestamp text like "3d"; count cards meeting the age rule.
+>>>>>>> ea37d4f (Updated project with latest changes)
         for (WebElement video : videos) {
             List<WebElement> durations = video.findElements(videoDuration);
             for (WebElement duration : durations) {
@@ -77,6 +109,10 @@ public class WarriorsPage {
     }
 
     private void closePopupsIfPresent() {
+<<<<<<< HEAD
+=======
+        // Popups are optional and vary by session, so they are handled defensively.
+>>>>>>> ea37d4f (Updated project with latest changes)
         clickIfPresent(By.id("onetrust-accept-btn-handler"));
         clickIfPresent(By.xpath("//div[contains(@class, 'hover:cursor-pointer') and text()='x']"));
     }
