@@ -9,7 +9,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/vsagar225225/NBA2.git'
+				git branch: 'main', url: 'https://github.com/vsagar225225/NBA2.git'
             }
         }
 
