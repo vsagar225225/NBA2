@@ -27,7 +27,7 @@ pipeline {
       // If you don’t generate surefire XML, keep allowEmptyResults true
       junit testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true
 
-      archiveArtifacts artifacts: '**/target/*.html', fingerprint: true
+      archiveArtifacts artifacts: '**/target/**', fingerprint: true
     }
   }
 }
